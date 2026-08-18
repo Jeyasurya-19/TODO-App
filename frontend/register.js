@@ -1,44 +1,43 @@
-const registerBtn=document.querySelector("#registerBtn");
+const registerBtn = document.querySelector("#registerBtn");
 
+registerBtn.addEventListener("click", async () => {
 
-registerBtn.addEventListener("click",()=>{
+    const username = document.querySelector("#username").value.trim();
+    const email = document.querySelector("#email").value.trim();
+    const password = document.querySelector("#password").value;
 
-    const username=document.querySelector("#username").value;
+    if (!username || !email || !password) {
+        alert("Please fill all fields.");
+        return;
+    }
 
-    const email=document.querySelector("#email").value;
+    try {
+        const response = await fetch(
+            `${window.APP_CONFIG.API_URL}/register`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: username,
+                    email: email,
+                    password: password
+                })
+            }
+        );
 
-    const password=document.querySelector("#password").value;
+        const data = await response.json();
 
-
-    fetch(`${window.APP_CONFIG.API_URL}/register`,
-    {
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-
-            username:username,
-            email:email,
-            password:password
-
-        })
-    })
-
-    .then(response=>{
-        if(!response.ok){
-            throw Error("Server Error");
+        if (!response.ok) {
+            throw new Error(data.message || "Registration failed");
         }
-        return response.json();
-    })
-    .then(data=>{
 
         alert(data.message);
+        window.location.href = "login.html";
 
-        window.location.href="login.html";
-
-    });
-
+    } catch (error) {
+        console.error("Registration Error:", error);
+        alert("Registration failed. Please try again.");
+    }
 });
