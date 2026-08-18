@@ -8,7 +8,7 @@ def get_connection():
         "port": int(os.getenv("DB_PORT", "4000")),
         "user": os.environ["DB_USER"],
         "password": os.environ["DB_PASSWORD"],
-        "database": os.environ.get("DB_NAME", "todoapp"),
+        "database": os.environ.get("DB_NAME", "Todo-App"),
     }
 
     # TiDB Cloud Starter/Essential requires TLS for public connections.
