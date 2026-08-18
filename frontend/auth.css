@@ -1,0 +1,168 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:linear-gradient(
+        135deg,
+        #d8f3dc,
+        #b7e4c7,
+        #95d5b2
+    );
+}
+
+
+.auth-box{
+
+    width:400px;
+
+    padding:40px;
+
+    background:rgba(255,255,255,0.75);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.15);
+
+    text-align:center;
+
+}
+
+
+.auth-box h1{
+
+    color:#344e41;
+
+    margin-bottom:10px;
+
+}
+
+
+.auth-box p{
+
+    color:#52796f;
+
+    margin-bottom:25px;
+
+}
+
+
+.auth-box input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:15px;
+
+    background:#f1faee;
+
+    font-size:15px;
+
+}
+
+
+.auth-box input:focus{
+
+    border:2px solid #52b788;
+
+}
+
+
+
+.auth-box button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#52b788;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+.auth-box button:hover{
+
+    background:#40916c;
+
+    transform:translateY(-3px);
+
+}
+
+
+.auth-box a{
+
+    color:#40916c;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+.password-box{
+    position:relative;
+    width:100%;
+}
+
+.password-box input{
+    width:100%;
+    padding-right:40px;
+}
+
+#togglePassword{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+}
+
+
+
+@media(max-width:450px){
+
+    .auth-box{
+
+        width:90%;
+
+        padding:30px;
+
+    }
+
+}
