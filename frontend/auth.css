@@ -1,168 +1,518 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI",sans-serif;
-}
+/* =========================================================
+   TODO APP - AUTHENTICATION UI
+   Modern Light / Dark Theme
+   Existing classes and IDs preserved
+   ========================================================= */
 
-body{
-
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-
-    background:linear-gradient(
-        135deg,
-        #d8f3dc,
-        #b7e4c7,
-        #95d5b2
-    );
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Inter, Arial, sans-serif;
 }
 
 
-.auth-box{
+/* =========================================================
+   THEME VARIABLES
+   ========================================================= */
 
-    width:400px;
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
 
-    padding:40px;
+    --background: #f1f5f9;
+    --background-secondary: #e0f2fe;
 
-    background:rgba(255,255,255,0.75);
+    --card: rgba(255, 255, 255, 0.92);
+    --card-border: rgba(255, 255, 255, 0.8);
 
-    backdrop-filter:blur(15px);
+    --input: #f8fafc;
+    --input-border: #e2e8f0;
+    --input-focus: #2563eb;
 
-    border-radius:25px;
+    --text: #172033;
+    --text-secondary: #64748b;
+    --link: #2563eb;
 
-    box-shadow:
-    0 15px 35px rgba(0,0,0,0.15);
+    --shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
 
-    text-align:center;
-
+    --toggle-background: #e2e8f0;
+    --toggle-text: #172033;
 }
 
 
-.auth-box h1{
+/* =========================================================
+   DARK THEME
+   Add class="dark" to <body> to activate
+   ========================================================= */
 
-    color:#344e41;
+body.dark {
+    --primary: #60a5fa;
+    --primary-hover: #3b82f6;
 
-    margin-bottom:10px;
+    --background: #0f172a;
+    --background-secondary: #111827;
 
+    --card: rgba(30, 41, 59, 0.92);
+    --card-border: rgba(255, 255, 255, 0.08);
+
+    --input: #1e293b;
+    --input-border: #334155;
+    --input-focus: #60a5fa;
+
+    --text: #f8fafc;
+    --text-secondary: #94a3b8;
+    --link: #60a5fa;
+
+    --shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+
+    --toggle-background: #334155;
+    --toggle-text: #f8fafc;
 }
 
 
-.auth-box p{
+/* =========================================================
+   BODY
+   ========================================================= */
 
-    color:#52796f;
+body {
+    min-height: 100vh;
 
-    margin-bottom:25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    padding: 20px;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(37, 99, 235, 0.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(16, 185, 129, 0.14),
+            transparent 35%
+        ),
+        var(--background);
+
+    transition:
+        background 0.35s ease,
+        color 0.35s ease;
+
+    animation: pageLoad 0.6s ease;
 }
 
 
-.auth-box input{
+/* =========================================================
+   PAGE ANIMATION
+   ========================================================= */
 
-    width:100%;
-
-    padding:15px;
-
-    margin-bottom:15px;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:15px;
-
-    background:#f1faee;
-
-    font-size:15px;
-
-}
-
-
-.auth-box input:focus{
-
-    border:2px solid #52b788;
-
-}
-
-
-
-.auth-box button{
-
-    width:100%;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:15px;
-
-    background:#52b788;
-
-    color:white;
-
-    font-size:16px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:0.3s;
-
-}
-
-
-.auth-box button:hover{
-
-    background:#40916c;
-
-    transform:translateY(-3px);
-
-}
-
-
-.auth-box a{
-
-    color:#40916c;
-
-    text-decoration:none;
-
-    font-weight:bold;
-
-}
-.password-box{
-    position:relative;
-    width:100%;
-}
-
-.password-box input{
-    width:100%;
-    padding-right:40px;
-}
-
-#togglePassword{
-    position:absolute;
-    right:10px;
-    top:50%;
-    transform:translateY(-50%);
-    cursor:pointer;
-}
-
-
-
-@media(max-width:450px){
-
-    .auth-box{
-
-        width:90%;
-
-        padding:30px;
-
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
     }
 
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   AUTH CARD
+   ========================================================= */
+
+.auth-box {
+    width: min(420px, 100%);
+
+    padding: 40px 36px;
+
+    text-align: center;
+
+    background: var(--card);
+
+    border: 1px solid var(--card-border);
+
+    border-radius: 24px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow: var(--shadow);
+
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+
+    animation: cardAppear 0.7s ease;
+}
+
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.auth-box h1 {
+    margin-bottom: 10px;
+
+    color: var(--text);
+
+    font-size: 30px;
+
+    font-weight: 750;
+
+    letter-spacing: -0.6px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.auth-box p {
+    margin-bottom: 28px;
+
+    color: var(--text-secondary);
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.auth-box input {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid var(--input-border);
+
+    outline: none;
+
+    border-radius: 12px;
+
+    background: var(--input);
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.auth-box input::placeholder {
+    color: var(--text-secondary);
+}
+
+
+.auth-box input:focus {
+    border-color: var(--input-focus);
+
+    background: var(--card);
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.10);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PASSWORD BOX
+   ========================================================= */
+
+.password-box {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.password-box input {
+    width: 100%;
+
+    padding-right: 48px;
+}
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+#togglePassword {
+    position: absolute;
+
+    right: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    color: var(--text-secondary);
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+#togglePassword:hover {
+    color: var(--primary);
+
+    background: rgba(37, 99, 235, 0.10);
+
+    transform: translateY(-50%) scale(1.05);
+}
+
+
+/* =========================================================
+   AUTH BUTTON
+   ========================================================= */
+
+.auth-box button {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    margin-top: 4px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 18px rgba(37, 99, 235, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.auth-box button:hover {
+    background: var(--primary-hover);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(37, 99, 235, 0.25);
+}
+
+
+.auth-box button:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.auth-box a {
+    color: var(--link);
+
+    text-decoration: none;
+
+    font-weight: 650;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.auth-box a:hover {
+    color: var(--primary-hover);
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+   Optional button
+   ========================================================= */
+
+.theme-toggle {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--card-border);
+
+    border-radius: 12px;
+
+    background: var(--toggle-background);
+
+    color: var(--toggle-text);
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+
+.theme-toggle:hover {
+    transform: translateY(-2px) rotate(5deg);
+}
+
+
+/* =========================================================
+   SMALL STATUS / ERROR MESSAGE
+   Works if you add these classes later
+   ========================================================= */
+
+.error-message {
+    margin-top: 10px;
+
+    color: #ef4444;
+
+    font-size: 13px;
+}
+
+
+.success-message {
+    margin-top: 10px;
+
+    color: #16a34a;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    body {
+        padding: 15px;
+    }
+
+
+    .auth-box {
+        width: 100%;
+
+        padding: 32px 22px;
+
+        border-radius: 20px;
+    }
+
+
+    .auth-box h1 {
+        font-size: 26px;
+    }
+
+
+    .auth-box p {
+        font-size: 14px;
+
+        margin-bottom: 24px;
+    }
+
+
+    .auth-box input {
+        padding: 13px 14px;
+    }
+
+
+    .auth-box button {
+        padding: 13px 14px;
+    }
+
+
+    .theme-toggle {
+        top: 12px;
+
+        right: 12px;
+
+        width: 38px;
+        height: 38px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
 }
