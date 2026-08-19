@@ -6,8 +6,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
-frontend_url = os.getenv("FRONTEND_URL", "*")
-CORS(app, origins=frontend_url if frontend_url == "*" else [frontend_url])
+CORS(
+    app,
+    resources={r"/*": {"origins": "*"}},
+    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"]
+)
 
 
 @app.route("/")
