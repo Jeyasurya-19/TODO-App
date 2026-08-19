@@ -1,469 +1,627 @@
+/* =========================================================
+   TODO APP - MODERN UI
+   Existing HTML IDs/classes are preserved
+   ========================================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Segoe UI", Inter, Arial, sans-serif;
 }
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --success: #16a34a;
+    --success-dark: #15803d;
+    --danger: #ef4444;
+    --danger-dark: #dc2626;
+
+    --text: #172033;
+    --muted: #64748b;
+
+    --background: #f1f5f9;
+    --card: rgba(255, 255, 255, 0.92);
+    --input: #f8fafc;
+    --border: #e2e8f0;
+
+    --shadow: 0 20px 50px rgba(15, 23, 42, 0.10);
+    --small-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
 
 body {
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 60px;
-    background: linear-gradient(135deg,#d8f3dc,#b7e4c7,#95d5b2);
-    animation: pageLoad 0.8s ease;
+
+    padding: 50px 20px;
+
+    background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.10), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(22, 163, 74, 0.08), transparent 35%),
+        var(--background);
+
+    color: var(--text);
+
+    animation: pageLoad 0.6s ease;
 }
 
 
-/* Page opening animation */
-@keyframes pageLoad{
-    from{
-        opacity:0;
-        transform:translateY(30px);
+/* =========================================================
+   PAGE ANIMATION
+   ========================================================= */
+
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
-    to{
-        opacity:1;
-        transform:translateY(0);
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
 
 .one {
-    width: 600px;
-    padding: 35px;
-    border-radius: 25px;
-    background: rgba(255,255,255,0.75);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    animation: boxFloat 1s ease;
+    width: min(680px, 100%);
+
+    padding: 32px;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+
+    background: var(--card);
+
+    backdrop-filter: blur(20px);
+
+    box-shadow: var(--shadow);
+
+    animation: boxFloat 0.7s ease;
+
+    position: relative;
+    overflow: hidden;
 }
 
 
-/* Container animation */
-@keyframes boxFloat{
-
-    from{
-        opacity:0;
-        transform:scale(0.9);
+@keyframes boxFloat {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
     }
 
-    to{
-        opacity:1;
-        transform:scale(1);
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
-
 }
 
 
-.top-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-
-#logout{
-    background:#ffb4a2;
-    border:none;
-    padding:10px 15px;
-    border-radius:12px;
-    cursor:pointer;
-    color:white;
-    font-weight:600;
-    transition:0.3s;
-}
-
-
-#logout:hover{
-    background:#e76f51;
-    transform:translateY(-3px);
-}
-
-
-#logout:active{
-    transform:scale(0.9);
-}
-
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .one::before {
     content: "🌿 My Peaceful Task Manager";
+
     display: block;
+
     text-align: center;
+
     font-size: 28px;
-    font-weight: 700;
-    color: #344e41;
-    margin-bottom: 30px;
+    font-weight: 750;
+
+    letter-spacing: -0.5px;
+
+    color: var(--text);
+
+    margin-bottom: 28px;
 }
 
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   LOGOUT BUTTON
+   ========================================================= */
+
+#logout {
+    border: 1px solid #fecaca;
+
+    padding: 10px 17px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background: #fff1f2;
+    color: var(--danger-dark);
+
+    font-size: 14px;
+    font-weight: 650;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+#logout:hover {
+    background: #fee2e2;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.15);
+}
+
+
+#logout:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================================
+   INPUT AREA
+   ========================================================= */
 
 #txt {
     width: 75%;
-    padding: 16px 18px;
-    border: 2px solid transparent;
-    outline:none;
-    border-radius:15px;
-    background:#f1faee;
-    font-size:16px;
-    color:#264653;
-    transition:0.3s;
+
+    padding: 15px 17px;
+
+    border: 1px solid var(--border);
+
+    outline: none;
+
+    border-radius: 12px;
+
+    background: var(--input);
+
+    color: var(--text);
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 
-#txt:focus{
+#txt::placeholder {
+    color: #94a3b8;
+}
 
-    border-color:#52b788;
+
+#txt:focus {
+    border-color: var(--primary);
+
+    background: #ffffff;
 
     box-shadow:
-    0 0 10px rgba(82,183,136,0.4);
-
-    transform:scale(1.03);
-
+        0 0 0 4px rgba(37, 99, 235, 0.10);
 }
 
+
+/* =========================================================
+   ADD BUTTON
+   ========================================================= */
 
 #ad {
+    width: 22%;
 
-    width:22%;
-    padding:16px;
-    border:none;
-    border-radius:15px;
-    cursor:pointer;
-    background:#52b788;
-    color:white;
-    font-weight:600;
-    transition:0.3s;
+    padding: 15px;
 
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 650;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-#ad:hover{
+#ad:hover {
+    background: var(--primary-dark);
 
-    background:#40916c;
+    transform: translateY(-2px);
 
-    transform:translateY(-3px);
-
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
 }
 
 
-#ad:active{
-
-    transform:scale(0.9);
-
+#ad:active {
+    transform: scale(0.97);
 }
 
+
+/* =========================================================
+   TODO LIST
+   ========================================================= */
 
 #list {
+    width: 100%;
 
-    width:100%;
-    margin-top:35px;
-    list-style:none;
+    margin-top: 30px;
 
+    list-style: none;
 }
 
+
+/* =========================================================
+   TODO ITEM
+   ========================================================= */
 
 #list li {
+    width: 100%;
 
-    width:100%;
-    min-height:70px;
+    min-height: 68px;
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    padding:18px 20px;
+    gap: 15px;
 
-    margin-bottom:18px;
+    padding: 15px 16px;
 
-    background:rgba(255,255,255,0.85);
+    margin-bottom: 12px;
 
-    border-radius:18px;
+    border: 1px solid var(--border);
 
-    color:#344e41;
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    color: var(--text);
+
+    box-shadow: var(--small-shadow);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+    animation: taskAdd 0.35s ease;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+@keyframes taskAdd {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+#list li:hover {
+    transform: translateY(-2px);
+
+    border-color: #cbd5e1;
 
     box-shadow:
-    0 8px 20px rgba(0,0,0,0.12);
-
-    transition:0.4s;
-
-    animation:taskAdd 0.5s ease;
-
-    font-size:17px;
-
-    font-weight:500;
-
+        0 12px 28px rgba(15, 23, 42, 0.11);
 }
 
 
+/* =========================================================
+   TODO BUTTONS
+   ========================================================= */
 
-/* New task animation */
+#list button {
+    padding: 8px 13px;
 
-@keyframes taskAdd{
+    margin-left: 6px;
 
-    from{
+    border: none;
 
-        opacity:0;
+    border-radius: 9px;
 
-        transform:translateX(-50px);
+    cursor: pointer;
 
-    }
+    font-size: 13px;
+    font-weight: 650;
 
-    to{
-
-        opacity:1;
-
-        transform:translateX(0);
-
-    }
-
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
+#list button:hover {
+    transform: translateY(-1px);
+}
 
-#list li:hover{
 
-    transform:translateY(-5px) scale(1.02);
+#list button:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================================================
+   COMPLETE / EDIT BUTTON
+   ========================================================= */
+
+#list button:first-of-type {
+    background: #dcfce7;
+
+    color: var(--success-dark);
+}
+
+
+#list button:first-of-type:hover {
+    background: #bbf7d0;
+
+    box-shadow: 0 5px 12px rgba(22, 163, 74, 0.12);
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+   ========================================================= */
+
+#list button:last-of-type {
+    background: #fee2e2;
+
+    color: var(--danger-dark);
+}
+
+
+#list button:last-of-type:hover {
+    background: #fecaca;
+
+    box-shadow: 0 5px 12px rgba(239, 68, 68, 0.12);
+}
+
+
+/* =========================================================
+   COMPLETED TASK
+   ========================================================= */
+
+.done {
+    text-decoration: line-through;
+
+    opacity: 0.65;
+
+    background: #f0fdf4 !important;
+
+    border-color: #bbf7d0 !important;
+
+    animation: completeTask 0.3s ease;
+}
+
+
+.done span {
+    text-decoration: line-through;
+
+    color: var(--muted);
+}
+
+
+@keyframes completeTask {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.98);
+    }
+}
+
+
+/* =========================================================
+   EDIT INPUT
+   ========================================================= */
+
+li input {
+    padding: 8px 10px;
+
+    margin-right: 5px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #f8fafc;
+
+    color: var(--text);
+
+    font-size: 14px;
+}
+
+
+li input:focus {
+    border-color: var(--primary);
 
     box-shadow:
-    0 15px 25px rgba(0,0,0,0.18);
-
+        0 0 0 3px rgba(37, 99, 235, 0.08);
 }
 
 
-
-#list button{
-
-    padding:9px 15px;
-
-    margin-left:8px;
-
-    border:none;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    transition:0.3s;
-
+li button {
+    margin-left: 5px;
 }
 
 
+/* =========================================================
+   DELETE ANIMATION
+   ========================================================= */
 
-#list button:hover{
-
-    transform:translateY(-3px);
-
+.remove-animation {
+    animation: removeTask 0.4s forwards;
 }
 
 
-#list button:active{
-
-    transform:scale(0.9);
-
-}
-
-
-
-#list button:first-of-type{
-
-    background:#74c69d;
-
-    color:white;
-
-}
-
-
-#list button:first-of-type:hover{
-
-    background:#52b788;
-
-}
-
-
-
-#list button:last-of-type{
-
-    background:#ffb4a2;
-
-    color:white;
-
-}
-
-
-#list button:last-of-type:hover{
-
-    background:#e76f51;
-
-}
-
-
-
-.done{
-
-    text-decoration:line-through;
-
-    opacity:0.65;
-
-    background:#d8f3dc !important;
-
-    animation:completeTask 0.4s ease;
-
-}
-
-
-
-/* Done animation */
-
-@keyframes completeTask{
-
-    from{
-
-        transform:scale(1);
-
+@keyframes removeTask {
+    from {
+        opacity: 1;
+        transform: translateX(0);
     }
 
-    to{
-
-        transform:scale(0.97);
-
-    }
-
-}
-
-
-
-/* Delete animation */
-
-.remove-animation{
-
-    animation:removeTask 0.5s forwards;
-
-}
-
-
-@keyframes removeTask{
-
-    from{
-
-        opacity:1;
-
-        transform:translateX(0);
-
-    }
-
-    to{
-
-        opacity:0;
-
-        transform:translateX(100px);
-
-    }
-
-}
-
-
-
-li input{
-
-    padding:5px;
-
-    margin-right:5px;
-
-}
-
-
-li button{
-
-    margin-left:5px;
-
-}
-
-
-.done span{
-
-    text-decoration:line-through;
-
-    color:gray;
-
-}
-
-
-
-@media(max-width:650px){
-
-    body{
-
-        padding:20px;
-
-        align-items:center;
-
-    }
-
-
-    .one{
-
-        width:100%;
-
-        padding:25px;
-
-    }
-
-
-    .one::before{
-
-        font-size:22px;
-
-    }
-
-
-    #txt{
-
-        width:100%;
-
-        margin-bottom:12px;
-
-    }
-
-
-    #ad{
-
-        width:100%;
-
-    }
-
-
-    #list li{
-
-        flex-direction:column;
-
-        gap:15px;
-
-        align-items:flex-start;
-
-    }
-
-}
-.remove-animation{
-    animation:removeTask 0.5s forwards;
-}
-
-@keyframes removeTask{
-    from{
-        opacity:1;
-        transform:translateX(0);
-    }
-    to{
-        opacity:0;
-        transform:translateX(100px);
+    to {
+        opacity: 0;
+        transform: translateX(70px);
     }
 }
 
-.edit-animation{
-    transform:scale(1.03);
-    transition:0.3s ease;
+
+/* =========================================================
+   EDIT ANIMATION
+   ========================================================= */
+
+.edit-animation {
+    transform: scale(1.02);
+
+    transition: transform 0.25s ease;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    body {
+        padding: 20px 12px;
+
+        align-items: center;
+    }
+
+
+    .one {
+        width: 100%;
+
+        padding: 24px 18px;
+
+        border-radius: 20px;
+    }
+
+
+    .one::before {
+        font-size: 23px;
+
+        margin-bottom: 24px;
+    }
+
+
+    #txt {
+        width: 100%;
+
+        margin-bottom: 10px;
+    }
+
+
+    #ad {
+        width: 100%;
+    }
+
+
+    #list {
+        margin-top: 24px;
+    }
+
+
+    #list li {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 12px;
+
+        padding: 15px;
+    }
+
+
+    #list li > div {
+        width: 100%;
+    }
+
+
+    #list button {
+        margin-left: 4px;
+    }
+
+
+    #logout {
+        padding: 9px 13px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    body {
+        padding: 12px 8px;
+    }
+
+
+    .one {
+        padding: 20px 14px;
+    }
+
+
+    .one::before {
+        font-size: 20px;
+    }
+
+
+    #list button {
+        padding: 7px 10px;
+
+        font-size: 12px;
+    }
 }
