@@ -45,7 +45,7 @@ toggle.addEventListener("click",()=>{
     }
     else{
         password.type="password";
-        toggle.textContent= &#x1F441;
+        toggle.textContent="👁️";
     }
 
 });
