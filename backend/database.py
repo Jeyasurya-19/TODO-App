@@ -11,14 +11,10 @@ def get_connection():
         "database": os.environ.get("DB_NAME", "Todo-App"),
     }
 
-    # TiDB Cloud Starter/Essential requires TLS for public connections.
+    # TiDB Cloud requires TLS
     if os.getenv("DB_SSL", "true").lower() == "true":
+        config["ssl_ca"] = "/etc/ssl/certs/ca-certificates.crt"
         config["ssl_verify_cert"] = True
         config["ssl_verify_identity"] = True
-
-        # Optional CA file if the platform/environment requires an explicit CA.
-        ssl_ca = os.getenv("DB_SSL_CA")
-        if ssl_ca:
-            config["ssl_ca"] = ssl_ca
 
     return mysql.connector.connect(**config)
